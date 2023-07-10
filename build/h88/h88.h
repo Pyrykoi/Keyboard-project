@@ -1,0 +1,113 @@
+/* Copyright 2019 Josh Hinnebusch
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#pragma once
+
+#include "quantum.h"
+
+// This a shortcut to help you visually see your layout.
+// The following is an example using the Planck MIT layout
+// The first section contains all of the arguments
+// The second converts the arguments into a two-dimensional array
+// Row, colum in K(00)row(0)col
+#define LAYOUT_all(\
+	K000, K001, K010, K011, K002, K003,    K012, K013, K004, K005,    K015, K016, K007, K006,    K017, K018, K008,  \
+	K020, K021, K030, K031, K022, K023, K032, K033, K024, K025, K034, K035, K026, K027, K036,    K037, K028, K038,  \
+	K040, K041, K050, K051, K042, K043, K052, K053, K044, K045, K054, K055, K046, K047,          K057, K058, K048,  \
+	K060, K061, K070, K071, K062, K063, K072, K073, K064, K065, K074, K075, K066, K067,                             \
+ 	K080, KC_NO, K090, K081, K082, K093, K092, K083, K084, K095, K094, K085, K086, K097,           	   K098,        \
+	K100, K101, K110,                   K112,                   K105, K104, K116, K117,          K107, K108, K118   \
+) { \
+	{ K000,  K001,  K002,  K003,  K004,  K005, K006,  K007,  K008 }, \
+	{ K010,  K011,  K012,  K013,  KC_NO,  K015,  K016,  K017,  K018 }, \
+	{ K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028 }, \
+	{ K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  K038 }, \
+	{ K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047, K048 }, \
+	{ K050,  K051,  K052,  K053,  K054,  K055,  KC_NO,  K057,  K058 }, \
+	{ K060,  K061,  K062,  K063,  K064,  K065,  K066,   K067 }, \
+	{ K070,  K071,  K072,  K073,  K074,  K075,  KC_NO,  KC_NO, KC_NO }, \
+	{ K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \
+	{ K090,  KC_NO,  K092,  K093,  K094,  K095,  KC_NO,  K097, K098 }, \
+	{ K100,  K101,  KC_NO, KC_NO, K104, K105,  KC_NO, K107, K108 }, \
+	{ K110,  KC_NO, K112, KC_NO, KC_NO, KC_NO,  K116,  K117, K118 }  \
+}
+
+
+#define LAYOUT_tkl_ansi(\
+	K000, K010, K001, K011, K002, K012,    K003, K013, K004, K014,    K015, K006, K016, K007,    K017, K008, K018,  \
+	K020, K030, K021, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K027,          K037, K028, K038,  \
+	K040, K050, K041, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046, K056,          K057, K048, K058,  \
+	K060, K070, K061, K071, K062, K072, K063, K073, K064, K074, K065, K075,  K076,                                  \
+ 	K080,     K081, K091, K082, K092, K083, K093, K084, K094, K085, K095,      K086,                   K088,        \
+	K100, K110, K101,                   K113,                   K105, K115, K106, K116,          K117, K108, K118   \
+) { \
+	{ K000,  K001,  K002,  K003,  K004,  KC_NO, K006,  K007,  K008 }, \
+	{ K010,  K011,  K012,  K013,  K014,  K015,  K016,  K017,  K018 }, \
+	{ K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028 }, \
+	{ K030,  K031,  K032,  K033,  K034,  K035, KC_NO,  K037,  K038 }, \
+	{ K040,  K041,  K042,  K043,  K044,  K045,  K046,  KC_NO, K048 }, \
+	{ K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  K058 }, \
+	{ K060,  K061,  K062,  K063,  K064,  K065, KC_NO,  KC_NO, KC_NO }, \
+	{ K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \
+	{ K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, K088 }, \
+	{KC_NO,  K091,  K092,  K093,  K094,  K095, KC_NO,  KC_NO, KC_NO }, \
+	{ K100,  K101,  KC_NO, KC_NO, KC_NO, K105,  K106,  KC_NO, K108 }, \
+	{ K110,  KC_NO, KC_NO, K113,  KC_NO, K115,  K116,  K117,  K118 }  \
+}
+
+#define LAYOUT_tkl_ansi_wkl(\
+	K000, K010, K001, K011, K002, K012,    K003, K013, K004, K014,    K015, K006, K016, K007,    K017, K008, K018,  \
+	K020, K030, K021, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K027,          K037, K028, K038,  \
+	K040, K050, K041, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046, K056,          K057, K048, K058,  \
+	K060, K070, K061, K071, K062, K072, K063, K073, K064, K074, K065, K075,  K076,                                  \
+ 	K080,     K081, K091, K082, K092, K083, K093, K084, K094, K085, K095,      K086,                   K088,        \
+	K100,       K101,                   K113,                         K115,       K116,          K117, K108, K118   \
+) { \
+	{ K000,  K001,  K002,  K003,  K004,  KC_NO, K006,  K007,  K008 }, \
+	{ K010,  K011,  K012,  K013,  K014,  K015,  K016,  K017,  K018 }, \
+	{ K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028 }, \
+	{ K030,  K031,  K032,  K033,  K034,  K035, KC_NO,  K037,  K038 }, \
+	{ K040,  K041,  K042,  K043,  K044,  K045,  K046,  KC_NO, K048 }, \
+	{ K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  K058 }, \
+	{ K060,  K061,  K062,  K063,  K064,  K065, KC_NO,  KC_NO, KC_NO }, \
+	{ K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \
+	{ K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, K088 }, \
+	{KC_NO,  K091,  K092,  K093,  K094,  K095, KC_NO,  KC_NO, KC_NO }, \
+	{ K100,  K101,  KC_NO, KC_NO, KC_NO,KC_NO, KC_NO,  KC_NO, K108 }, \
+	{KC_NO,  KC_NO, KC_NO, K113,  KC_NO, K115,  K116,  K117,  K118 }  \
+}
+
+#define LAYOUT_all_ver2(\
+	K000, K001, K010, K011, K002, K012,    K003, K013, K004, K014,    K015, K006, K016, K007,    K017, K008, K018,  \
+	K020, K021, K030, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K036, K027,    K037, K028, K038,  \
+	K040, K041, K050, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046, K056,          K057, K048, K058,  \
+	K060, K061, K070, K071, K062, K072, K063, K073, K064, K074, K065, K075, K066, K076,                             \
+ 	K080, K081, K090, K091, K082, K092, K083, K093, K084, K094, K085, K095, K086, K096,                K088,        \
+	K100, K101, K110,                   K113,                   K105, K115, K106, K116,          K117, K108, K118   \
+) { \
+	{ K000,  K001,  K002,  K003,  K004,  KC_NO, K006,  K007,  K008 }, \
+	{ K010,  K011,  K012,  K013,  K014,  K015,  K016,  K017,  K018 }, \
+	{ K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028 }, \
+	{ K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  K038 }, \
+	{ K040,  K041,  K042,  K043,  K044,  K045,  K046,  KC_NO, K048 }, \
+	{ K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  K058 }, \
+	{ K060,  K061,  K062,  K063,  K064,  K065,  K066,  KC_NO, KC_NO }, \
+	{ K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \
+	{ K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, K088 }, \
+	{ K090,  K091,  K092,  K093,  K094,  K095,  K096,  KC_NO, KC_NO }, \
+	{ K100,  K101,  KC_NO, KC_NO, KC_NO, K105,  K106,  KC_NO, K108 }, \
+	{ K110,  KC_NO, KC_NO, K113,  KC_NO, K115,  K116,  K117,  K118 }  \
+}
+
