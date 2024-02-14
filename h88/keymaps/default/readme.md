@@ -1,1 +1,1 @@
-# The default keymap for h88a
+# Non-default, needed to chage keys around
