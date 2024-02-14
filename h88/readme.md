@@ -29,7 +29,7 @@ Controller: Atmega32u4
     
 The H88 PCB utilizes duplex matrix organization.
 
-    Caps Lock LED: D5
+    Caps Lock LED: D7
     Scroll Lock LED: E6
     Num Lock LED: not supported
     Backlight Pin: B7
