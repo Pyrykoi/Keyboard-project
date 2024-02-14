@@ -19,12 +19,12 @@ Controller: Atmega32u4
 
     /* Column pin configuration
     * col: 0   1   2   3   4   5   6   7   8   
-    * pin: F0  F1  F4  F5  F6  F7  C7  C6  D2
+    * pin: B0, B1, B2, B3, D0, D1, D2, D3, D5
     */
      
     /* Row pin configuration
     * row: 0   1   2   3   4   5   6   7   8   9   10  11
-    * pin: B0  B1  B2  B3  D0  D1  B5  B6  D7  B4  D6  D4  (Rev 1)
+    * pin: D7, D6, B4, D4, B6, B5, F0, F1, C6, C7, F4, F5  (ver2)
     */
     
 The H88 PCB utilizes duplex matrix organization.
